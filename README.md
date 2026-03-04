@@ -1,3 +1,3 @@
-# Java Sandbox
+# Password Checker
 
-You can create new repos from this sandbox repo to try out different pieces of code.
+Follow the instructions to create your password, then test its strength
