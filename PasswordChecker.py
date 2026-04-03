@@ -5,10 +5,12 @@ def print_welcome() -> str:
         Please choose an action:
             1: Create a password (Reccomended for first use)
             2: Check password strength
-            3: Cancel""")
+            3: Cancel
+            4: Previous passwords""")
 
 def password_requirement() -> str:
-    print("""To create a strong password, please ensure it meets the following requirements
+    print("""To create a strong password, please ensure it meets the following
+          requirements
         A: Contains 8 or more characters
         B: Contains both uppercase and lowercase letters
         C: Contains a number (0-9)
@@ -47,6 +49,7 @@ Please select an option:
 def main() -> "None":
     print_welcome()
     run = True
+    passwords: list[str] = [""]
     menu_select = int(sys.stdin.readline().rstrip())
     selection = 0
     while run:
@@ -60,6 +63,10 @@ def main() -> "None":
                 password = sys.stdin.readline().rstrip()
                 answer = password_checker(password)
                 print(answer)
+                if passwords[0] == '':
+                    passwords[0] = password
+                else:
+                    passwords.append(password)
                 menu()
                 selection = int(sys.stdin.readline().rstrip())
                 if selection == 2:
@@ -77,10 +84,14 @@ def main() -> "None":
                 user_input = sys.stdin.readline().rstrip()
                 answer = password_checker(user_input)
                 print(answer)
+                if passwords[0] == '':
+                    passwords[0] = user_input
+                else:
+                    passwords.append(user_input)
                 menu()
                 selection = int(sys.stdin.readline().rstrip())
                 if selection == 2:
-                    print_welcome
+                    print_welcome()
                     menu_select = int(sys.stdin.readline().rstrip())
                     break
                 elif selection == 3:
@@ -91,4 +102,11 @@ def main() -> "None":
             print("Goodbye")
             run = False
             break
+        elif menu_select == 4:
+            if passwords == "":
+              print("No previous passwords")
+            else:
+              print(passwords)
+            print_welcome()
+            menu_select = int(sys.stdin.readline().rstrip())
 main()
